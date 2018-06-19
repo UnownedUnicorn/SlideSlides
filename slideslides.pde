@@ -122,6 +122,7 @@ void draw() {
    image(sp2.img, 0, 0);
    popMatrix();
  }
+ hint(DISABLE_DEPTH_TEST);
 //rotateX(PI * sin(count/118.0));
 //rotateY(PI* sin(count/118.0));
 //rotateZ(PI * sin(count/118.0));
@@ -132,18 +133,18 @@ void draw() {
   //image(img, 0, height/2, img.width/2, img.height/2);
 }
 
-String basePath = "/home/pi/slides1";
+String basePath = ".";
 
 void loadSp1() {
       // load next slide
-    sp1.randomizeStart(basePath + "/Sarah&Grant-" + (int)random(1, 951) + ".jpg");
+    sp1.randomizeStart(basePath + "/Unicorn" + (int)random(1, 12) + ".jpg");
     sp1.setTarget(frameRate, 6.0);
     loading = false;
 }
 
 void loadSp2() {
       // load next slide
-    sp2.randomizeStart(basePath + "/Sarah&Grant-" + (int)random(1, 951) + ".jpg");
+    sp2.randomizeStart(basePath + "/Unicorn" + (int)random(1, 12) + ".jpg");
     sp2.setTarget(frameRate, 6.0);
     loading = false;
 }
