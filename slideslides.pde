@@ -50,10 +50,14 @@ class SlidePic {
     nextTime = endTime + (long)((seconds - 2) * 1000); 
   }
   
-  void tick() {
-    x += dX;
-    y += dY;
-    s += dS;
+  void tick(long time) {
+    long dSec = time - startTime;
+    float x1 = (dSec - 3000) / 2000.0;
+    float speedCurve = x1*x1 + 1;
+    x += dX * speedCurve;
+    y += dY * speedCurve;
+    s += dS * speedCurve;
+    if (s < 0) s = 0; 
   }
   
   int fade(long time) {
@@ -72,9 +76,9 @@ class SlidePic {
 SlidePic sp1 = null;
 SlidePic sp2 = null;
 void setup() {
-  //size(800, 600, P3D);
+  size(800, 600, P3D);
   //size(800,600);
-  fullScreen(P3D);
+  //fullScreen(P3D);
   frameRate(30);
   noCursor();
   // The image file must be in the data folder of the current sketch 
@@ -104,7 +108,7 @@ void draw() {
   
   if (cTime <= sp1.endTime) {
     pushMatrix();
-    sp1.tick();
+    sp1.tick(cTime);
     // Displays the image at its actual size at point (0,0)
    translate(sp1.x, sp1.y);
    scale(sp1.s);
@@ -115,7 +119,7 @@ void draw() {
  
  if (cTime <= sp2.endTime) {
    pushMatrix();
-   sp2.tick();
+   sp2.tick(cTime);
    translate(sp2.x, sp2.y);
    scale(sp2.s);
    tint(255, sp2.fade(cTime));  
